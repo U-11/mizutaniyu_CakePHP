@@ -149,7 +149,7 @@ class AuctionController extends AuctionBaseController{
 
   public function home(){
     $bidinfo=$this->paginate('Bidinfo',[
-      'conditions'=>['bidinfo.user_id'=>$this->Auth->user('id')],
+      'conditions'=>['Bidinfo.user_id'=>$this->Auth->user('id')],
       'contain'=>['Users','Biditems'],
       'order'=>['created'=>'desc'],
       'limit'=>10])->toArray();
@@ -158,7 +158,7 @@ class AuctionController extends AuctionBaseController{
 
   public function home2(){
     $biditems=$this->paginate('Biditems',[
-      'conditions'=>['biditems.user_id'=>$this->Auth->user('id')],
+      'conditions'=>['Biditems.user_id'=>$this->Auth->user('id')],
       'contain'=>['Users','Bidinfo'],
       'order'=>['created'=>'desc'],
       'limit'=>10])->toArray();
