@@ -5,7 +5,7 @@
 
         <tr>
             <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-            <th class="main" scope="col"><?= $this->Paginator->sort('name') ?>< th>
+            <th class="main" scope="col"><?= $this->Paginator->sort('name') ?>
             <th scope="col"><?= $this->Paginator->sort('created') ?></th>
             <th scope="col" class="actions"><?= __('Actions') ?></th>
         </tr>
