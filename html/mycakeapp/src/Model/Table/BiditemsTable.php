@@ -62,6 +62,8 @@ class BiditemsTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        $validator->provider('Custom', 'App\Model\Validation\CustomValidation');
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -87,7 +89,11 @@ class BiditemsTable extends Table
             ->scalar('picture')
             ->maxLength('picture', 255)
             ->requirePresence('picture', 'create')
-            ->notEmptyString('picture');
+            ->notEmptyString('picture')
+            ->add('picture','isImage',[
+                'rule'=>['isImage'],
+                'provider'=>'Custom'
+            ]);
 
         $validator
             ->dateTime('endtime')

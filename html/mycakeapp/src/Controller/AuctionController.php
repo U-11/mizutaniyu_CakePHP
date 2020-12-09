@@ -73,11 +73,9 @@ class AuctionController extends AuctionBaseController{
 
     if($this->request->is('post')){
       $file=$this->request->getData('picture');
-      $ext=substr($file['name'],-4);
-      if($ext==='.jpg' || $ext==='.png' || $ext==='jpeg'){
-        $fileName=date('YmdHis').$file['name'];
-        $filePath='../webroot/img/'.$fileName;
-        move_uploaded_file($file['tmp_name'],$filePath);
+      $fileName=date('YmdHis').$file['name'];
+      $filePath='../webroot/img/'.$fileName;
+      move_uploaded_file($file['tmp_name'],$filePath);
 
         $data=array(
           'user_id'=>$this->request->getData('user_id'),
@@ -94,9 +92,9 @@ class AuctionController extends AuctionBaseController{
           return $this->redirect(['action'=>'index']);
         }
         $this->Flash->error(__('保存に失敗しました。もう一度入力してください。'));
-      }else{
-        $this->Flash->error(__('※拡張子が「.jpg」,「.png」,「.jpeg」のいずれかのファイルをアップロードしてください。'));
-      }
+      // }else{
+      //   $this->Flash->error(__('※拡張子が「.jpg」,「.png」,「.jpeg」のいずれかのファイルをアップロードしてください。'));
+      // }
     }
       
     $this->set(compact('biditem'));
