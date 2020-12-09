@@ -84,7 +84,6 @@ class AuctionController extends AuctionBaseController
             $file = $this->request->getData('picture');
             $fileName = date('YmdHis') . $file['name'];
             $filePath = '../webroot/img/' . $fileName;
-            move_uploaded_file($file['tmp_name'], $filePath);
 
             $data = array(
                 'user_id' => $this->request->getData('user_id'),
@@ -97,6 +96,7 @@ class AuctionController extends AuctionBaseController
             $biditem = $this->Biditems->patchEntity($biditem, $data);
 
             if ($this->Biditems->save($biditem)) {
+                move_uploaded_file($file['tmp_name'], $filePath);
                 $this->Flash->success(__('保存しました。'));
                 return $this->redirect(['action' => 'index']);
             }
