@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -90,9 +91,9 @@ class BiditemsTable extends Table
             ->maxLength('picture', 255)
             ->requirePresence('picture', 'create')
             ->notEmptyString('picture')
-            ->add('picture','isImage',[
-                'rule'=>['isImage'],
-                'provider'=>'Custom'
+            ->add('picture', 'isImage', [
+                'rule' => ['isImage'],
+                'provider' => 'Custom'
             ]);
 
         $validator

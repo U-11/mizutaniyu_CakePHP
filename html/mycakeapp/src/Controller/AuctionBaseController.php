@@ -1,72 +1,80 @@
 <?php
+
 namespace APP\Controller;
+
 use App\Controller\AppController;
 
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Event\Event;
 
-class AuctionBaseController extends AppController{
+class AuctionBaseController extends AppController
+{
 
-  public function initialize(){
-    parent::initialize();
+    public function initialize()
+    {
+        parent::initialize();
 
-    $this->loadComponent('RequestHandler');
-    $this->loadComponent('Flash');
-    $this->loadComponent('Auth',[
-      'authorize'=>['Controller'],
-      'authenticate'=>[
-        'Form'=>[
-          'fields'=>[
-            'username'=>'username',
-            'password'=>'password'
-          ]
-        ]
-      ],
-      'loginRedirect'=>[
-        'controller'=>'Users',
-        'action'=>'login'
-      ],
-      'logoutRedirect'=>[
-        'controller'=>'Users',
-        'action'=>'logout',
-      ],
-      'authError'=>'ログインしてください。'
-    ]);
-  }
-
-  function login(){
-    if($this->request->isPost()){
-      $user=$this->Auth->identify();
-
-      if(!empty($user)){
-        $this->Auth->setUser($user);
-        return $this->redirect($this->Auth->redirectUrl());
-      }
-      $this->Flash->error('ユーザー名かパスワードが間違っています。');
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'username',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'logout',
+            ],
+            'authError' => 'ログインしてください。'
+        ]);
     }
-  }
 
-  public function logout(){
-    $this->request->session()->destroy();
-    return $this->redirect($this->Auth->logout());
-  }
+    function login()
+    {
+        if ($this->request->isPost()) {
+            $user = $this->Auth->identify();
 
-  public function beforeFilter(Event $event){
-    parent::beforeFilter($event);
-    $this->Auth->allow([]);
-  }
-
-  public function isAuthorized($user=null){
-    if($user['role']==='admin'){
-      return true;
+            if (!empty($user)) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('ユーザー名かパスワードが間違っています。');
+        }
     }
-    if($user['role']==='user'){
-      if($this->name=='Auction'){
-        return true;
-      }else{
+
+    public function logout()
+    {
+        $this->request->session()->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow([]);
+    }
+
+    public function isAuthorized($user = null)
+    {
+        if ($user['role'] === 'admin') {
+            return true;
+        }
+        if ($user['role'] === 'user') {
+            if ($this->name == 'Auction') {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return false;
-      }
     }
-    return false;
-  }
 }
