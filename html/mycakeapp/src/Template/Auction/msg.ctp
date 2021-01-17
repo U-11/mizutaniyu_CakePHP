@@ -3,10 +3,10 @@
 <h3>※メッセージ情報</h3>
 <h3>※メッセージを送信する</h3>
 <?=$this->Form->create($bidmsg) ?>
-<?=$this->Form->hidden($bidinfo_id,['value'=>$bidinfo->id]) ?>
+<?=$this->Form->hidden('bidinfo_id',['value'=>$bidinfo->id]) ?>
 <?=$this->Form->hidden('user_id',['value'=>$authuser['id']]) ?>
 <?=$this->Form->textarea('message',['rows'=>2]); ?>
-<?=$this->Form->button(__'Submit') ?>
+<?=$this->Form->button('Submit') ?>
 <?=$this->Form->end() ?>
 <table cellingpadding="0" cellspacing="0">
 <thread>
@@ -18,7 +18,7 @@
 </thread>
 <tbody>
 <?php if(!empty($bidmsgs)): ?>
-    <?php foreach($bidmsgs as$msg) ?>
+    <?php foreach($bidmsgs as $msg): ?>
     <tr>
         <td><?=h($msg->user->username) ?></td>
         <td><?=h($msg->message) ?></td>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $this->name . '/' . $this->request->action ?>
+        <?= $this->name . '/' . $this->request->getParam('action') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 

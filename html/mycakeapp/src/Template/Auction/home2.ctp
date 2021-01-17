@@ -17,7 +17,9 @@
                 <td><?= h($biditem->name) ?></td>
                 <td><?= h($biditem->created) ?></td>
                 <td class="action">
-                    <?= $this->Html->link(__('View'), ['action' => 'msg', $biditem->id]) ?>
+                    <?php if(!empty($biditem->bidinfo)): ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'msg', $biditem->bidinfo->id]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
