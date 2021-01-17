@@ -35,8 +35,8 @@
 </table>
 <div class="related">
     <h4><?= __('落札情報') ?></h4>
-    <?php if (!empty($biditem->bidinfo)) : ?>
-        <table cellingpadding=0 cellspacing="0">
+    <?php if (!empty($biditem->bidinfo)): ?>
+        <table cellingpadding="0" cellspacing="0">
             <tr>
                 <th scope="col">落札者</th>
                 <th scope="col">落札金額</th>
@@ -45,7 +45,7 @@
             <tr>
                 <td><?= h($biditem->bidinfo->user->username) ?></td>
                 <td><?= h($biditem->bidinfo->price) ?>円</td>
-                <td><?= h($biditem->bidinfo->endtime) ?>円</td>
+                <td><?= h($biditem->endtime) ?></td>
             </tr>
         </table>
     <?php else : ?>
